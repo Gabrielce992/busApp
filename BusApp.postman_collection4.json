@@ -1,0 +1,118 @@
+{
+  "info": {
+    "_postman_id": "busapp-collection-0001",
+    "name": "BusApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "basicAuthHeader",
+      "value": "Basic dXNlcjpwYXNzd29yZA==",
+      "type": "string",
+      "description": "user:password base64"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Buses (paginado)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{basicAuthHeader}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/bus?page=0&size=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["bus"],
+          "query": [
+            {"key": "page", "value": "0"},
+            {"key": "size", "value": "10"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Bus by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{basicAuthHeader}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/bus/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["bus", "1"]
+        }
+      }
+    },
+    {
+      "name": "Create Bus",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "{{basicAuthHeader}}", "type": "text"},
+          {"key": "Content-Type", "value": "application/json", "type": "text"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"numeroBus\": \"{{numeroBus}}\",\n  \"placa\": \"{{placa}}\",\n  \"caracteristicas\": \"{{caracteristicas}}\",\n  \"marcaId\": {{marcaId}},\n  \"estado\": \"{{estado}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/bus",
+          "host": ["{{baseUrl}}"],
+          "path": ["bus"]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Generar buses dinámicamente",
+              "if (!pm.environment.get('counter')) {",
+              "    pm.environment.set('counter', 2); // comenzamos desde 2 porque ya hay 2 buses",
+              "}",
+              "let i = parseInt(pm.environment.get('counter')) + 1;",
+              "",
+              "// Alternar marcas 1 y 2",
+              "let marca = (i % 2 === 0) ? 1 : 2;",
+              "",
+              "// Alternar estado ACTIVO/INACTIVO",
+              "let estado = (i % 2 === 0) ? 'ACTIVO' : 'INACTIVO';",
+              "",
+              "// Generar placa única",
+              "let placa = 'ABC-' + (100 + i);",
+              "",
+              "// Generar número de bus",
+              "let numeroBus = 'B-' + (100 + i);",
+              "",
+              "// Características variables",
+              "let caracteristicas = (i % 3 === 0) ? '30 asientos, A/C' : '40 asientos, A/C';",
+              "",
+              "pm.environment.set('numeroBus', numeroBus);",
+              "pm.environment.set('placa', placa);",
+              "pm.environment.set('caracteristicas', caracteristicas);",
+              "pm.environment.set('marcaId', marca);",
+              "pm.environment.set('estado', estado);",
+              "",
+              "pm.environment.set('counter', i);"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
