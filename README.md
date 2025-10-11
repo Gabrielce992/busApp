@@ -1,11 +1,25 @@
-# 🚌 BusApp — Sistema de Gestión de Buses
 
-Proyecto **Full-Stack** desarrollado como reto técnico.  
-Incluye **API REST segura** (Spring Boot + PostgreSQL), **frontend web** (React + Vite) y colección **Postman** para validación.
+# 🚌 BusApp — Sistema de Gestión de Buses  
+
+> Proyecto **Full Stack** desarrollado como **reto técnico**.  
+Incluye una **API REST segura** (Spring Boot + PostgreSQL), un **frontend web moderno** (React + Vite) y una **colección Postman** para validación de endpoints.  
 
 ---
 
-## 📂 Estructura del Repositorio
+## 🧩 Tecnologías Utilizadas  
+
+![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-brightgreen?logo=springboot)
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-4-purple?logo=vite)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)
+![Maven](https://img.shields.io/badge/Maven-3-red?logo=apachemaven)
+![Node.js](https://img.shields.io/badge/Node.js-18-green?logo=node.js)
+![Postman](https://img.shields.io/badge/Postman-Collection-orange?logo=postman)
+
+---
+
+## 📂 Estructura del Repositorio  
 
 ```plaintext
 BusApp/
@@ -36,38 +50,40 @@ BusApp/
 │
 └── postman/
     └── BusApp.postman_collection.json
-```
+````
 
 ---
 
-## 📊 Diagrama de Arquitectura
-
-A continuación se muestran los diagramas utilizados en el proyecto:
+## 📊 Diagramas del Proyecto
 
 ### 🔹 Diagrama General
+
 ![Diagrama General](./diag.png)
 
 ### 🔹 Vista de la Aplicación
+
 ![Vista de la Aplicación](./vista.JPG)
 
 ---
 
 ## ⚙️ Requisitos Previos
 
-* Java **21+**
-* Maven **3+**
-* PostgreSQL **15+**
-* Node.js **18+**
-* Postman (última versión)
-* IDEs recomendados:
+* ☕ **Java 21+**
+* 🧱 **Maven 3+**
+* 🐘 **PostgreSQL 15+**
+* ⚛️ **Node.js 18+**
+* 📬 **Postman** (última versión)
+* 💻 IDEs recomendados:
+
   * Backend → IntelliJ IDEA Ultimate
   * Frontend → VS Code
 
 ---
 
-## 🔥 Configuración del Backend
+## 🔧 Configuración del Backend
 
-### 1. Crear Base de Datos PostgreSQL
+### 1️⃣ Crear Base de Datos PostgreSQL
+
 ```sql
 CREATE DATABASE busapp;
 CREATE USER postgres WITH PASSWORD '???';
@@ -76,7 +92,8 @@ GRANT ALL PRIVILEGES ON DATABASE busapp TO postgres;
 
 ---
 
-### 2. Configurar `application.properties`
+### 2️⃣ Configurar `application.properties`
+
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/busapp
 spring.datasource.username=postgres
@@ -89,7 +106,8 @@ spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS=false
 
 ---
 
-### 3. Cargar Datos Iniciales (`data.sql`)
+### 3️⃣ Cargar Datos Iniciales (`data.sql`)
+
 ```sql
 INSERT INTO brand (nombre)
 SELECT 'Volvo' WHERE NOT EXISTS (SELECT 1 FROM brand WHERE nombre='Volvo');
@@ -105,53 +123,59 @@ AND NOT EXISTS (SELECT 1 FROM bus WHERE placa='ABC-101');
 
 ---
 
-### 4. Ejecutar Backend
+### ▶️ Ejecutar Backend
+
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 
-👉 API disponible en: [http://localhost:8080](http://localhost:8080)
+> 🟢 API disponible en: [http://localhost:8080](http://localhost:8080)
 
 ---
 
 ## ⚛️ Configuración del Frontend
 
-### 1. Instalar dependencias
+### 1️⃣ Instalar dependencias
+
 ```bash
 cd frontend
 npm install
 ```
 
-### 2. Configurar `.env`
+### 2️⃣ Configurar `.env`
+
 ```bash
 VITE_BACKEND_URL=http://localhost:8080
 ```
 
-### 3. Ejecutar Frontend
+### 3️⃣ Ejecutar Frontend
+
 ```bash
 npm run dev
 ```
 
-👉 UI disponible en: [http://localhost:5173](http://localhost:5173)
+> 🟣 UI disponible en: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🔑 Seguridad
+## 🔒 Seguridad
 
-* Autenticación **Basic Auth**
+* Autenticación: **Basic Auth**
 * Usuario por defecto:
-```
-user / password
-```
-* Header de autorización:
-```
-Authorization: Basic dXNlcjpwYXNzd29yZA==
-```
+
+  ```
+  user / password
+  ```
+* Header:
+
+  ```
+  Authorization: Basic dXNlcjpwYXNzd29yZA==
+  ```
 
 ---
 
-## 📂 Endpoints Principales
+## 🌐 Endpoints Principales
 
 | Método | Endpoint  | Descripción             | Auth |
 | ------ | --------- | ----------------------- | ---- |
@@ -159,7 +183,8 @@ Authorization: Basic dXNlcjpwYXNzd29yZA==
 | GET    | /bus/{id} | Obtener bus por ID      | ✅    |
 | POST   | /bus      | Crear nuevo bus         | ✅    |
 
-Ejemplo:
+📌 Ejemplo:
+
 ```bash
 GET http://localhost:8080/bus?page=0&size=10
 Authorization: Basic dXNlcjpwYXNzd29yZA==
@@ -169,65 +194,29 @@ Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 ## 🧪 Pruebas con Postman
 
-La colección Postman está en:
-`postman/BusApp.postman_collection.json`
+**Colección:** `postman/BusApp.postman_collection.json`
 
----
+1. 📥 **Importar colección:**
 
-### 1. 📥 Importar colección
-1. Abrir **Postman → Import**  
-2. Seleccionar archivo `BusApp.postman_collection.json`  
-3. La colección aparecerá en el panel izquierdo como **BusApp**
+   * Postman → Import → Selecciona archivo
 
----
+2. ⚙️ **Configurar variables:**
 
-### 2. ⚙️ Configurar Variables
-En la pestaña **Variables** de la colección:
+   | Variable          | Valor                        |
+   | ----------------- | ---------------------------- |
+   | `baseUrl`         | `http://localhost:8080`      |
+   | `basicAuthHeader` | `Basic dXNlcjpwYXNzd29yZA==` |
 
-| Variable          | Valor                          |
-|-------------------|---------------------------------|
-| `baseUrl`         | `http://localhost:8080`        |
-| `basicAuthHeader` | `Basic dXNlcjpwYXNzd29yZA==`    |
+3. 🚀 **Requests incluidos:**
 
----
-
-### 3. 🚀 Requests Incluidos
-
-#### ✅ Get Buses (paginado)
-- **URL:** `{{baseUrl}}/bus?page=0&size=10`  
-- **Método:** `GET`  
-- **Header:** `Authorization: {{basicAuthHeader}}`
-
----
-
-#### ✅ Get Bus by ID
-- **URL:** `{{baseUrl}}/bus/1`  
-- **Método:** `GET`  
-- **Header:** `Authorization: {{basicAuthHeader}}`
-
----
-
-#### ✅ Create Bus (dinámico)
-- **URL:** `{{baseUrl}}/bus`  
-- **Método:** `POST`  
-- **Headers:**  
-  - `Authorization: {{basicAuthHeader}}`  
-  - `Content-Type: application/json`
-
-**Body:**
-```json
-{
-  "numeroBus": "{{numeroBus}}",
-  "placa": "{{placa}}",
-  "caracteristicas": "{{caracteristicas}}",
-  "marcaId": {{marcaId}},
-  "estado": "{{estado}}"
-}
-```
+   * `GET /bus` (paginado)
+   * `GET /bus/{id}`
+   * `POST /bus` (creación dinámica con script JS)
 
 ---
 
 ### 4. ⚙️ Script Pre-request
+
 El request **Create Bus** incluye un script que genera datos automáticamente:
 
 ```javascript
@@ -256,60 +245,74 @@ pm.environment.set('counter', i);
 
 ---
 
-### 5. 🧩 Validación Rápida
-1. Ejecutar **Get Buses** → debes ver los buses iniciales (ej. `B-100`, `B-101`).  
-2. Ejecutar **Create Bus** → debe responder `201 Created`.  
-3. Ejecutar **Get Buses** nuevamente → aparece el nuevo bus creado.  
-4. Ejecutar **Get Bus by ID** → ver detalles de un bus específico.
+## 🧠 Validación Rápida
+
+1. Ejecutar **Get Buses** → ver datos iniciales
+2. Ejecutar **Create Bus** → respuesta `201 Created`
+3. Repetir **Get Buses** → nuevo bus visible
+4. Ejecutar **Get Bus by ID** → ver detalles
 
 ---
 
 ## 🌐 Frontend en Acción
 
-El frontend permite:
-* Ver lista de buses paginada
-* Consultar detalles por ID
-* Navegar entre páginas
+El **frontend React** permite:
+
+* 📋 Listar buses con paginación
+* 🔍 Consultar detalles por ID
+* ⚡ Renderizado dinámico desde API REST
 
 ---
 
-## ✅ Checklist de Verificación
+## ✅ Checklist Final
 
-### ✅ Backend
-* [x] Modelo **Bus** con campos requeridos + relación con **Marca**
-* [x] Endpoints `/bus` y `/bus/{id}` con paginación
-* [x] Seguridad con **Basic Auth**
-* [x] Base de datos **PostgreSQL** configurada
-* [x] Proyecto subido a repositorio remoto
+### 🧩 Backend
 
-### ✅ Frontend
-* [x] **React 18+**, uso de **useState** y **useEffect**
-* [x] Tabla que muestra datos de la API
-* [x] Consumo de `/bus/{id}`
-* [x] Paginación en la tabla
-* [x] Repositorio remoto disponible
+* [x] Modelo Bus + relación Marca
+* [x] Endpoints `/bus` y `/bus/{id}`
+* [x] Basic Auth implementado
+* [x] PostgreSQL configurado
+* [x] Deploy local funcional
 
-### ✅ Postman
-* [x] Colección importable con variables y scripts
-* [x] Validación dinámica de creación de buses
+### ⚛️ Frontend
+
+* [x] React 18 + Hooks
+* [x] Tabla dinámica con paginación
+* [x] Consumo directo del backend
+* [x] Integración con `.env`
+
+### 🧪 Postman
+
+* [x] Scripts automáticos
+* [x] Variables y entornos configurables
 
 ---
 
-## 🚀 Flujo de Trabajo
-1. Levantar PostgreSQL
-2. Ejecutar backend → `mvn spring-boot:run`
-3. Ejecutar frontend → `npm run dev`
-4. Validar API con Postman
-5. Visualizar buses en [http://localhost:5173](http://localhost:5173)
+## 🚀 Flujo de Ejecución
+
+1️⃣ Levantar PostgreSQL
+2️⃣ Ejecutar Backend → `mvn spring-boot:run`
+3️⃣ Ejecutar Frontend → `npm run dev`
+4️⃣ Validar con Postman
+5️⃣ Visualizar datos en el navegador
 
 ---
 
 ## 📜 Licencia
-Proyecto académico — uso educativo.
+
+🧾 Proyecto académico — uso educativo.
 
 ---
 
-## 👤 Autor
-**Castañeda Huaytalla Gab** — Técnico Practicante  
-Desarrollador Full-Stack Java & React  
-Reto solicitado por **Civa — 2025**
+## 👨‍💻 Autor
+
+**Castañeda Huaytalla Gabriel**
+Desarrollador Full Stack — *Java | Spring Boot | React*
+
+📧 [gabrielce992@gmail.com](mailto:gabrielce992@gmail.com)
+
+🏢 Reto solicitado por **Civa — 2025**
+
+
+
+
